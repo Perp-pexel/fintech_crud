@@ -1,4 +1,3 @@
-import e from "express";
 import Joi from "joi";
 
 export const registerUserValidator = Joi.object({
