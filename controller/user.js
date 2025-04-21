@@ -24,14 +24,7 @@ export const registerUser = async (req, res, next) => {
             password: hashedPassword
         });
 
-        // await mailTransporter.sendMail({
-        //     to: value.email,
-        //     subject: 'User Registration',
-        //     text: 'Account registered successfully'
-        // });
-
-
-        res.json('Registered user!')
+        res.status(201).json('Registered user!')
     } catch (error) {
         next(error);
     }
@@ -61,11 +54,10 @@ export const logInUser = async (req, res, next) => {
             { expiresIn: '24h' }
         );
 
-        res.json({
+        res.status(200).json({
             message: 'User checked in!',
             accessToken: token
         });
-        // res.json('User checked in')
     } catch (error) {
         next(error);
     }
@@ -79,20 +71,20 @@ export const getProfile = async (req, res, next) => {
 
             .findById(req.auth.id)
             .select({ password: false });
-        res.json(user);
+        res.status(200).json(user);
     } catch (error) {
         next(error);
     }
 }
 
 export const logOutUser = (req, res, next) => {
-    res.json('User checked out')
+    res.status(200).json('User checked out')
 }
 
 export const updateProfile = (req, res, next) => {
     try {
         const { error, value } = updateProfileValidator.validate(req.body);
-        res.json('User  profile updated');
+        res.status(200).json('User  profile updated');
     } catch (error) {
         next(error);
     }
